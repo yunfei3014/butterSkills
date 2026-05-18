@@ -1,0 +1,17 @@
+{
+  "$schema": "https://anthropic.com/claude-code/marketplace.schema.json",
+  "name": "butterSkills",
+  "description": "The butter skill family. One-click install the company lifecycle: design it, run it, build it, recipe-ify it.",
+  "owner": {
+    "name": "Yunfei Ma",
+    "url": "https://github.com/yunfei3014"
+  },
+  "plugins": [
+    {
+      "name": "butterSkills",
+      "description": "Design, run, build, and recipe-ify a company — butterOPC -> butterOPCOffice -> butterBuild <-> butterRecipeMaker.",
+      "source": "./",
+      "category": "productivity"
+    }
+  ]
+}

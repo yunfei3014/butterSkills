@@ -1,0 +1,101 @@
+{
+  "tables": {
+    "pages": {
+      "columns": {
+        "id": { "type": "uuid", "primaryKey": true, "default": "gen_random_uuid()" },
+        "owner_id": { "type": "uuid" },
+        "parent_id": { "type": "uuid" },
+        "title": { "type": "text", "nullable": false, "default": "''" },
+        "icon": { "type": "text" },
+        "kind": { "type": "text", "nullable": false, "default": "'doc'" },
+        "cover": { "type": "text" },
+        "sort_order": { "type": "float8", "nullable": false, "default": "0" },
+        "archived": { "type": "boolean", "nullable": false, "default": "false" },
+        "visibility": { "type": "text", "nullable": false, "default": "'shared'" },
+        "rag_doc_id": { "type": "text" },
+        "created_at": { "type": "timestamptz", "default": "now()" },
+        "updated_at": { "type": "timestamptz", "default": "now()" }
+      },
+      "indexes": {
+        "pages_owner_idx": { "columns": ["owner_id"] },
+        "pages_parent_idx": { "columns": ["parent_id"] }
+      }
+    },
+    "blocks": {
+      "columns": {
+        "id": { "type": "uuid", "primaryKey": true, "default": "gen_random_uuid()" },
+        "owner_id": { "type": "uuid" },
+        "page_id": { "type": "uuid", "nullable": false, "references": { "table": "pages", "column": "id", "onDelete": "CASCADE" } },
+        "parent_id": { "type": "uuid" },
+        "type": { "type": "text", "nullable": false, "default": "'paragraph'" },
+        "text": { "type": "text", "nullable": false, "default": "''" },
+        "checked": { "type": "boolean", "nullable": false, "default": "false" },
+        "sort_order": { "type": "float8", "nullable": false, "default": "0" },
+        "props": { "type": "text", "nullable": false, "default": "'{}'" },
+        "created_at": { "type": "timestamptz", "default": "now()" },
+        "updated_at": { "type": "timestamptz", "default": "now()" }
+      },
+      "indexes": {
+        "blocks_page_idx": { "columns": ["page_id"] },
+        "blocks_parent_idx": { "columns": ["parent_id"] }
+      }
+    },
+    "db_fields": {
+      "columns": {
+        "id": { "type": "uuid", "primaryKey": true, "default": "gen_random_uuid()" },
+        "owner_id": { "type": "uuid" },
+        "page_id": { "type": "uuid", "nullable": false, "references": { "table": "pages", "column": "id", "onDelete": "CASCADE" } },
+        "name": { "type": "text", "nullable": false, "default": "'Field'" },
+        "type": { "type": "text", "nullable": false, "default": "'text'" },
+        "width": { "type": "integer", "nullable": false, "default": "180" },
+        "sort_order": { "type": "float8", "nullable": false, "default": "0" },
+        "options": { "type": "text", "nullable": false, "default": "'[]'" },
+        "created_at": { "type": "timestamptz", "default": "now()" }
+      },
+      "indexes": { "db_fields_page_idx": { "columns": ["page_id"] } }
+    },
+    "db_records": {
+      "columns": {
+        "id": { "type": "uuid", "primaryKey": true, "default": "gen_random_uuid()" },
+        "owner_id": { "type": "uuid" },
+        "page_id": { "type": "uuid", "nullable": false, "references": { "table": "pages", "column": "id", "onDelete": "CASCADE" } },
+        "sub_page_id": { "type": "uuid" },
+        "sort_order": { "type": "float8", "nullable": false, "default": "0" },
+        "props": { "type": "text", "nullable": false, "default": "'{}'" },
+        "rag_doc_id": { "type": "text" },
+        "created_at": { "type": "timestamptz", "default": "now()" },
+        "updated_at": { "type": "timestamptz", "default": "now()" }
+      },
+      "indexes": { "db_records_page_idx": { "columns": ["page_id"] } }
+    },
+    "db_views": {
+      "columns": {
+        "id": { "type": "uuid", "primaryKey": true, "default": "gen_random_uuid()" },
+        "owner_id": { "type": "uuid" },
+        "page_id": { "type": "uuid", "nullable": false, "references": { "table": "pages", "column": "id", "onDelete": "CASCADE" } },
+        "name": { "type": "text", "nullable": false, "default": "'Table'" },
+        "type": { "type": "text", "nullable": false, "default": "'table'" },
+        "sort_order": { "type": "float8", "nullable": false, "default": "0" },
+        "config": { "type": "text", "nullable": false, "default": "'{}'" },
+        "created_at": { "type": "timestamptz", "default": "now()" }
+      },
+      "indexes": { "db_views_page_idx": { "columns": ["page_id"] } }
+    },
+    "shares": {
+      "columns": {
+        "id": { "type": "uuid", "primaryKey": true, "default": "gen_random_uuid()" },
+        "owner_id": { "type": "uuid" },
+        "page_id": { "type": "uuid", "nullable": false, "references": { "table": "pages", "column": "id", "onDelete": "CASCADE" } },
+        "invitee_email": { "type": "text", "nullable": false },
+        "invitee_id": { "type": "uuid" },
+        "role": { "type": "text", "nullable": false, "default": "'viewer'" },
+        "created_at": { "type": "timestamptz", "default": "now()" }
+      },
+      "indexes": {
+        "shares_email_idx": { "columns": ["invitee_email"] },
+        "shares_invitee_idx": { "columns": ["invitee_id"] },
+        "shares_page_idx": { "columns": ["page_id"] }
+      }
+    }
+  }
+}
