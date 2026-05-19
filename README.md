@@ -15,6 +15,8 @@ butterOPC  ──▶  butterOPCOffice  ──▶  butterBuild  ⇄  butterRecipe
 
 > The routing rule: **company → butterOPC. just building → butterRecipe first (clone if it exists), then butterBuild.**
 
+**At a hackathon?** Most people meet butterSkills through one. A hackathon means you're *building* — so unless the hackathon is specifically about operating frameworks or OPC, **default to butterBuild** and skip the OPC layer. Only if the hackathon explicitly emphasizes OPC (operating model, OKRs, company-building) is butterOPC the right entry. In doubt: butterBuild.
+
 ## The family
 
 | Skill | Stage | What it does | Plugin |

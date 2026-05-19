@@ -121,7 +121,7 @@ Score every candidate on four axes. Pull hard data, do not guess.
 ### License — `gh` or fetch the LICENSE file
 
 ```bash
-GH_CONFIG_DIR=~/.gh-config gh api repos/<owner>/<name> --jq '.license.spdx_id'
+gh api repos/<owner>/<name> --jq '.license.spdx_id'
 ```
 
 | Tier | Licenses | What it means for the recipe |
@@ -135,7 +135,7 @@ The recipe you ship is always **MIT** — it is your own code.
 ### Stars — demand proof
 
 ```bash
-GH_CONFIG_DIR=~/.gh-config gh api repos/<owner>/<name> --jq '.stargazers_count'
+gh api repos/<owner>/<name> --jq '.stargazers_count'
 ```
 
 More stars = more validated demand for the *concept*. This is the main "is it
@@ -145,7 +145,7 @@ worth recipe-ifying" signal.
 
 ```bash
 # open advisories
-GH_CONFIG_DIR=~/.gh-config gh api repos/<owner>/<name>/security-advisories --jq 'length' 2>/dev/null
+gh api repos/<owner>/<name>/security-advisories --jq 'length' 2>/dev/null
 # known vulns via OSV
 curl -s "https://api.osv.dev/v1/query" -d '{"package":{"name":"<name>","ecosystem":"npm"}}' | head -c 400
 ```
@@ -158,7 +158,7 @@ it on the way through.
 ### Maintenance
 
 ```bash
-GH_CONFIG_DIR=~/.gh-config gh api repos/<owner>/<name> --jq '{pushed:.pushed_at,issues:.open_issues_count}'
+gh api repos/<owner>/<name> --jq '{pushed:.pushed_at,issues:.open_issues_count}'
 ```
 
 Last push + open-issue load. A *loved but dead* project is a great recipe
@@ -214,8 +214,9 @@ Use the `mcp__butterbase__*` MCP tools directly. Sequence:
 6. `create_frontend_deployment` (framework `static`) → `PUT` the zip to the
    returned upload URL → `manage_frontend` action `start_deployment`.
 
-This is exactly the butterForms build. If anything is unclear, read
-`~/Desktop/butter-forms/` — schema.json, functions/, index.html.
+This is exactly the butterForms build. If anything is unclear, read the
+butterForms repo (github.com/yunfei3014/butter-forms) — schema.json,
+functions/, index.html.
 
 If the build is large, you may dispatch the schema/function/frontend work to
 parallel `Agent` runs — but only when the pieces are genuinely independent.
@@ -251,10 +252,10 @@ it is not advisory — if it finds a hit, you stop, strip, and re-scan until cle
   secrets, webhook URL-tokens, any `*_SECRET` / `*_TOKEN` / `*_PASSWORD` value.
 - **Credential files** — `.env`, `.env.*`, `*.pem`, `*.key`, `id_rsa`,
   `credentials.json`, `service-account*.json`, `.npmrc` with auth.
-- **Personal / private info** — Fei's personal email (`yunfei3014@gmail.com` is
-  allowed *only* in `LICENSE` copyright and the git commit author; nowhere
-  else), phone numbers, home address, other people's emails, internal app_ids
-  for unrelated private apps.
+- **Personal / private info** — the repo owner's personal email (allowed *only*
+  in `LICENSE` copyright and the git commit author; nowhere else), phone
+  numbers, home address, other people's emails, internal app_ids for unrelated
+  private apps.
 - **Real data in seed/fixtures** — seed scripts and demo fixtures must contain
   only synthetic data. No real CRM contacts, no real customer rows, no scraped
   PII. If the build pulled from a real Butterbase app, scrub the seed.
@@ -264,7 +265,7 @@ it is not advisory — if it finds a hit, you stop, strip, and re-scan until cle
 - The recipe's own **public** URLs — `*.butterbase.dev` live demo, the `/fn`
   API base const in `index.html` (public endpoint, guarded server-side).
 - The recipe's own source `app_id` (it is the public demo app).
-- `yunfei3014@gmail.com` in `LICENSE` + commit author only.
+- The repo owner's own email in `LICENSE` + commit author only.
 
 ### Run the scan
 
@@ -286,8 +287,9 @@ grep -rnIE \
 grep -rnIE '(SECRET|TOKEN|PASSWORD|API_KEY|PRIVATE_KEY)\s*[:=]\s*["'\''][^"'\'' ]{8,}' \
   . --exclude-dir=.git || echo "clean: no secret assignments"
 
-# 4. personal email outside LICENSE
-grep -rnI 'yunfei3014@gmail.com' . --exclude-dir=.git | grep -v 'LICENSE'
+# 4. any email address outside LICENSE — review each hit; only the repo
+#    owner's own email, in LICENSE / the commit author, is acceptable
+grep -rnIoE '[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,}' . --exclude-dir=.git | grep -vi 'LICENSE'
 ```
 
 Also have an `Agent` (or read directly) review `index.html`, every
@@ -311,24 +313,23 @@ a real person's data in a demo row).
 
 ## Phase 6 — Ship to public GitHub
 
-The recipe code lives in a public repo under `yunfei3014`.
+The recipe code lives in a public repo under your own GitHub account.
 
 Repo contents:
 - `index.html` — the frontend
 - `functions/*.js` — one file per Butterbase function
 - `schema.json` — the declarative schema
-- `LICENSE` — MIT, copyright Yunfei Ma
+- `LICENSE` — MIT, copyright the repo owner
 - `README.md` — what it is, the clean-room note (why not a fork of the
   original), architecture (app_id, tables, functions), and self-host steps
 
 ```bash
 cd <recipe-dir>
 git init -q && git add -A
-git -c user.name="Yunfei Ma" -c user.email="yunfei3014@gmail.com" \
-  commit -q -m "<recipe> — <one-line>. MIT.
+git commit -q -m "<recipe> — <one-line>. MIT.
 
 Co-Authored-By: Claude Opus 4.7 (1M context) <noreply@anthropic.com>"
-GH_CONFIG_DIR=~/.gh-config gh repo create butter-<thing> --public --source=. \
+gh repo create butter-<thing> --public --source=. \
   --remote=origin --push --description "<one-line>. A Butterbase recipe."
 ```
 

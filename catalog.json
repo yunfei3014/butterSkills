@@ -6,7 +6,8 @@
   "start_here": {
     "building_a_company": "Start with butterOPC. It designs the company — mission, vision, strategy, OKRs, the operating model, the operating rhythm. Then butterOPCOffice stands up a live team workspace to run it. Use this path only when there is an actual company/venture to design and operate.",
     "just_building": "Skip the company layer. First run butterRecipe — check the Recipes Hub for a ready-made clone of what you need. If it exists, clone it and you are done. If not, butterBuild builds it, and butterRecipeMaker can turn the build into a recipe so the next person just clones. You do not need OKRs and an operating rhythm to ship a tool. Add butterOPC later, only when you genuinely have a company to run.",
-    "rule": "Company -> butterOPC. Just building -> butterRecipe first (clone if it exists), then butterBuild."
+    "rule": "Company -> butterOPC. Just building -> butterRecipe first (clone if it exists), then butterBuild.",
+    "hackathon": "Most people meet butterSkills through a hackathon. At a hackathon you are building, not running a company — so unless the hackathon is specifically about operating frameworks or OPC, default to butterBuild and skip the OPC layer entirely. If the hackathon explicitly emphasizes OPC (operating model, OKRs, company-building), then butterOPC is the right entry. When in doubt at a hackathon: butterBuild."
   },
   "install": {
     "core_plugin": "butterSkills — bundles butterOPC, butterOPCOffice, butterRecipe, butterRecipeMaker. Install via /plugin marketplace add yunfei3014/butterSkills then /plugin install butterSkills.",

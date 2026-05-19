@@ -1,22 +1,17 @@
 ---
 name: butterOPC
-description: Apply Feii's three-tier operating framework (butterOPC) — Direction (Mission/Vision/Strategy/OKRs) × Operating Model (vertical customer-value pillars × horizontal stakeholder support) × Operating Rhythm (Annual to Daily) — on a settling Foundation. The OKR is the framework's spine, the single linkage between Strategy (upstream) and execution priorities (living inside operating model cells downstream). Use this skill whenever the user wants to plan, refresh, audit, or apply the framework to any venture — Butterbase, Beta Network (Beta Fund + Beta University), consulting, the fund. Trigger on phrases like "operating framework," "butterOPC," "operating model," "OKRs," "priorities," "company OS," "operating rhythm," "weekly review," "quarterly planning," or any strategy-to-execution question. CRITICAL — when activated, ALWAYS start with clarifying questions (which venture, current state, session goal, time horizon, multi-venture context) before producing output. Never skip this step.
+description: Apply a three-tier operating framework (butterOPC) — Direction (Mission/Vision/Strategy/OKRs) × Operating Model (vertical customer-value pillars × horizontal stakeholder support) × Operating Rhythm (Annual to Daily) — on a settling Foundation. The OKR is the framework's spine, the single linkage between Strategy (upstream) and execution priorities (living inside operating model cells downstream). Use this skill whenever the user wants to plan, refresh, audit, or apply the framework to any venture or company. Trigger on phrases like "operating framework," "butterOPC," "operating model," "OKRs," "priorities," "company OS," "operating rhythm," "weekly review," "quarterly planning," or any strategy-to-execution question. CRITICAL — when activated, ALWAYS start with clarifying questions (which venture, current state, session goal, time horizon, multi-venture context) before producing output. Never skip this step.
 ---
 
 # butterOPC — Operating Framework
 
-Feii's three-tier operating framework with a settling foundation. Used across Butterbase, Beta Network (Beta Fund + Beta University), consulting, and the fund.
+A three-tier operating framework with a settling foundation. Works for any venture or company — a startup, a fund, a consulting practice, a multi-division group.
 
 ## ALWAYS start with clarifying questions
 
 When this skill triggers, **do not jump to applying the framework**. The quality of the output depends on the quality of upfront context-gathering. Ask the user the following — adjust based on what's already clear from conversation context:
 
-1. **Which venture or instance?**
-   - Butterbase
-   - Beta Network as a whole, or Beta Fund / Beta University as separate instances
-   - Consulting
-   - The fund (separate from Beta Fund)
-   - A new instance entirely
+1. **Which venture or instance?** The company, product, fund, or practice this is for. If the user runs several, which one — and is it a standalone instance or one division of a larger entity?
 
 2. **What's the current state?**
    - Fresh start (no existing Direction doc)
@@ -147,9 +142,9 @@ For founders running multiple ventures, each venture is its own instance of the 
 
 **Do NOT merge OKRs across ventures.** They serve different stakeholders, customers, and timelines. Keep them parallel; the founder is the integrator.
 
-**Special case: Beta Network = Beta Fund + Beta University.** These are two divisions of one entity. Two valid setups:
-- **One instance** with both divisions under one Direction doc, separate priority stacks per division within shared cells
-- **Two instances** with separate Direction docs, integration at the "Beta Network" level via the founder
+**Special case: a multi-division entity.** When one entity has two or more divisions, two valid setups:
+- **One instance** with all divisions under one Direction doc, separate priority stacks per division within shared cells
+- **Two-plus instances** with separate Direction docs, integration at the parent-entity level via the founder
 
 Choose based on whether Strategy/OKRs are deeply intertwined (one instance) or independently planned (two instances). When unsure, ask the user.
 
