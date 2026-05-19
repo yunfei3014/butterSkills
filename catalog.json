@@ -9,8 +9,8 @@
     "rule": "Company -> butterOPC. Just building -> butterRecipe first (clone if it exists), then butterBuild."
   },
   "install": {
-    "core_plugin": "butterSkills — bundles butterOPC, butterOPCOffice, butterRecipe, butterRecipeMaker.",
-    "sibling_plugin": "butterBuild — the build/QA/ship toolchain (~50 skills). Ships as its own plugin in the same marketplace; installed separately because it is a large toolchain with its own build system."
+    "core_plugin": "butterSkills — bundles butterOPC, butterOPCOffice, butterRecipe, butterRecipeMaker. Install via /plugin marketplace add yunfei3014/butterSkills then /plugin install butterSkills.",
+    "butterBuild_toolchain": "butterBuild — the build/QA/ship toolchain (~50 skills) — is a self-installing monorepo, not a plugin. Install: git clone https://github.com/yunfei3014/butterbuild && cd butterbuild && ./setup. Update via the butterbuild-upgrade skill."
   },
   "skills": [
     {
@@ -32,11 +32,11 @@
     {
       "name": "butterBuild",
       "stage": "Build",
-      "plugin": "butterBuild (sibling)",
+      "plugin": "butterBuild (separate toolchain)",
       "does": "The build, QA, and ship toolchain — headless browser, QA test-and-fix, codex review, design review, ship, land-and-deploy, and more (~50 skills).",
       "use_when": "You are building, testing, or shipping any app or tool — with or without a company around it. This is the workhorse.",
       "skip_when": "Never, if you are building something.",
-      "install_note": "Large toolchain with its own build system. Ships as a sibling plugin in this marketplace; installed separately. See README."
+      "install_note": "Self-installing monorepo, not a plugin. Install: git clone https://github.com/yunfei3014/butterbuild && cd butterbuild && ./setup. Update via the butterbuild-upgrade skill."
     },
     {
       "name": "butterRecipe",

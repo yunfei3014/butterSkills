@@ -38,13 +38,14 @@ The recipe loop closes itself: **butterRecipe** checks the Hub *before* a build 
 /plugin install butterSkills
 ```
 
-**butterBuild** — the build/QA/ship toolchain — is a large monorepo with its own build system (~50 skills, browser binaries). It ships as a **sibling plugin** in the same marketplace and installs separately:
+**butterBuild** — the build/QA/ship toolchain (~50 skills) — is a self-installing monorepo, *not* a Claude Code plugin. It installs through its own setup script:
 
 ```
-/plugin install butterBuild
+git clone https://github.com/yunfei3014/butterbuild
+cd butterbuild && ./setup
 ```
 
-> butterBuild's repo lands its compiled artifacts via its own build step — `node_modules` and binaries are never committed; they regenerate on install.
+`./setup` builds the binaries and registers every butterBuild skill as a top-level skill. Update later with the `butterbuild-upgrade` skill. (It can't be a `/plugin install` target — its setup creates real top-level skill dirs so Claude discovers each skill directly, which the plugin model doesn't do.)
 
 ## /butterSkills
 
