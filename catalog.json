@@ -1,18 +1,22 @@
 {
   "family": "butterSkills",
-  "version": "0.1.0",
+  "version": "0.2.0",
   "tagline": "The company lifecycle, as installable skills.",
-  "lifecycle": "butterOPC -> butterOPCOffice -> butterBuild <-> butterRecipeMaker",
+  "lifecycle": "butterOPC -> butterOPCOffice -> butterBuild <-> butterRecipe / butterRecipeMaker",
   "start_here": {
     "building_a_company": "Start with butterOPC. It designs the company — mission, vision, strategy, OKRs, the operating model, the operating rhythm. Then butterOPCOffice stands up a live team workspace to run it. Use this path only when there is an actual company/venture to design and operate.",
-    "just_building": "Skip the company layer entirely. Go straight to butterBuild (or Butterbase directly) and ship the app or tool. You do not need OKRs and an operating rhythm to build a form builder. Add butterOPC later — when you genuinely have a company to run, not before. Most builds never need the company layer at all.",
-    "rule": "Company -> butterOPC. Just building -> butterBuild."
+    "just_building": "Skip the company layer. First run butterRecipe — check the Recipes Hub for a ready-made clone of what you need. If it exists, clone it and you are done. If not, butterBuild builds it, and butterRecipeMaker can turn the build into a recipe so the next person just clones. You do not need OKRs and an operating rhythm to ship a tool. Add butterOPC later, only when you genuinely have a company to run.",
+    "rule": "Company -> butterOPC. Just building -> butterRecipe first (clone if it exists), then butterBuild."
+  },
+  "install": {
+    "core_plugin": "butterSkills — bundles butterOPC, butterOPCOffice, butterRecipe, butterRecipeMaker.",
+    "sibling_plugin": "butterBuild — the build/QA/ship toolchain (~50 skills). Ships as its own plugin in the same marketplace; installed separately because it is a large toolchain with its own build system."
   },
   "skills": [
     {
       "name": "butterOPC",
       "stage": "Design",
-      "bundled": true,
+      "plugin": "butterSkills",
       "does": "Three-tier operating framework — Direction (Mission/Vision/Strategy/OKRs) x Operating Model (customer-value pillars x stakeholder support) x Operating Rhythm (annual to daily), on a settling Foundation.",
       "use_when": "You are designing, planning, or auditing a company or venture — OKRs, priorities, operating rhythm, strategy-to-execution.",
       "skip_when": "You just want to build one app or tool. This is company design, not app building."
@@ -20,7 +24,7 @@
     {
       "name": "butterOPCOffice",
       "stage": "Run",
-      "bundled": true,
+      "plugin": "butterSkills",
       "does": "Deploys a team workspace app on Butterbase — Notion-style pages and databases, command-K semantic search, email-domain-gated team auth, pre-seeded with the butterOPC framework.",
       "use_when": "You have a company to run and want the operating office live for your team.",
       "skip_when": "Solo, pre-company, or just prototyping — you do not need a team workspace yet."
@@ -28,19 +32,27 @@
     {
       "name": "butterBuild",
       "stage": "Build",
-      "bundled": false,
-      "does": "The build, QA, and ship toolchain — headless browser, QA test-and-fix, codex review, design review, ship, land-and-deploy, and more (47 skills).",
+      "plugin": "butterBuild (sibling)",
+      "does": "The build, QA, and ship toolchain — headless browser, QA test-and-fix, codex review, design review, ship, land-and-deploy, and more (~50 skills).",
       "use_when": "You are building, testing, or shipping any app or tool — with or without a company around it. This is the workhorse.",
       "skip_when": "Never, if you are building something.",
-      "install_note": "Heavy toolchain (~1 GB, browser binaries). Ships on its own track — see README. Not bundled in this plugin."
+      "install_note": "Large toolchain with its own build system. Ships as a sibling plugin in this marketplace; installed separately. See README."
+    },
+    {
+      "name": "butterRecipe",
+      "stage": "Browse",
+      "plugin": "butterSkills",
+      "does": "Browses the Butterbase Recipes Hub — the catalog of cloneable apps. Reads the live registry, presents what each recipe does, and helps the user clone the right one into their own account.",
+      "use_when": "Before building anything: check whether a ready-made recipe already exists. Also when the user asks what is available to clone.",
+      "skip_when": "You already know nothing matches and are going straight to a custom build."
     },
     {
       "name": "butterRecipeMaker",
       "stage": "Recipe",
-      "bundled": true,
-      "does": "Turns an open-source app — or one of your own builds — into a clonable Butterbase recipe. Checks the Recipes Hub first (clone if it already exists), scans for leaked secrets and PII, ships to a public GitHub repo, registers to the Hub.",
-      "use_when": "You want a build to become reusable, or you want to check whether a recipe already exists before building from scratch.",
-      "skip_when": "A genuine one-off you will never reuse."
+      "plugin": "butterSkills",
+      "does": "Turns an open-source app — or one of your own builds — into a clonable Butterbase recipe. Checks the Recipes Hub first, scans for leaked secrets and PII, ships to a public GitHub repo, registers to the Hub.",
+      "use_when": "You want a build to become reusable, or a needed recipe does not exist yet and should be built.",
+      "skip_when": "A genuine one-off you will never reuse, or a recipe already exists (use butterRecipe to clone it)."
     }
   ]
 }

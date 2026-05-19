@@ -3,39 +3,48 @@
 The **butter skill family** — the company lifecycle as installable Claude Code skills.
 
 ```
-butterOPC  ──▶  butterOPCOffice  ──▶  butterBuild  ⇄  butterRecipeMaker
-  design            run                  build         recipe-ify
+butterOPC  ──▶  butterOPCOffice  ──▶  butterBuild  ⇄  butterRecipe / butterRecipeMaker
+  design            run                  build         browse / make recipes
 ```
 
 ## Start here — which skill?
 
 **Building a company?** Start with **butterOPC**. It designs the company — mission, vision, strategy, OKRs, the operating model, the operating rhythm. Then **butterOPCOffice** stands up a live team workspace to run it.
 
-**Just building an app or a tool?** Skip the company layer. Go straight to **butterBuild** (or Butterbase directly) and ship it. You do not need OKRs and an operating rhythm to build a form builder. Add butterOPC later — when you genuinely have a company to run, not before. Most builds never need the company layer at all.
+**Just building an app or a tool?** Skip the company layer. First run **butterRecipe** — check the Recipes Hub for a ready-made clone of what you need. If it exists, clone it and you're done. If not, **butterBuild** builds it, and **butterRecipeMaker** can turn that build into a recipe so the next person just clones. You do not need OKRs and an operating rhythm to ship a tool. Add butterOPC later — when you genuinely have a company to run, not before.
 
-> The whole routing rule: **company → butterOPC. just building → butterBuild.**
+> The routing rule: **company → butterOPC. just building → butterRecipe first (clone if it exists), then butterBuild.**
 
 ## The family
 
-| Skill | Stage | What it does | Bundled |
-|-------|-------|--------------|---------|
-| `butterOPC` | Design | Three-tier operating framework — Direction × Operating Model × Operating Rhythm. Design and audit a company. | ✅ |
-| `butterOPCOffice` | Run | Deploys a team workspace on Butterbase — Notion-style pages, ⌘K search, domain-gated auth, pre-seeded with the butterOPC framework. | ✅ |
-| `butterBuild` | Build | The build / QA / ship toolchain — browser, QA, codex review, design review, ship, deploy (47 skills). | ⏷ separate |
-| `butterRecipeMaker` | Recipe | Turns a build (or an OSS app) into a clonable Butterbase recipe. Checks the Recipes Hub first, scans for leaked secrets/PII, ships public, registers to the Hub. | ✅ |
+| Skill | Stage | What it does | Plugin |
+|-------|-------|--------------|--------|
+| `butterOPC` | Design | Three-tier operating framework — Direction × Operating Model × Operating Rhythm. Design and audit a company. | butterSkills |
+| `butterOPCOffice` | Run | Deploys a team workspace on Butterbase — Notion-style pages, ⌘K search, domain-gated auth, pre-seeded with the butterOPC framework. | butterSkills |
+| `butterBuild` | Build | The build / QA / ship toolchain — browser, QA, codex review, design review, ship, deploy (~50 skills). | butterBuild (sibling) |
+| `butterRecipe` | Browse | Browses the Recipes Hub — the catalog of cloneable apps. Find a ready-made recipe and clone it instead of building. | butterSkills |
+| `butterRecipeMaker` | Recipe | Turns a build (or an OSS app) into a clonable Butterbase recipe. Checks the Hub first, scans for leaked secrets/PII, ships public, registers to the Hub. | butterSkills |
 
-The loop closes inside `butterRecipeMaker`: it checks the Recipes Hub **before** building (clone what exists) and registers **after** building (so the next build finds it). Every recipe shipped makes the next build a clone.
+The recipe loop closes itself: **butterRecipe** checks the Hub *before* a build (clone what exists), **butterRecipeMaker** registers *after* a build (so the next `butterRecipe` finds it). Every recipe shipped makes the next build a clone.
 
 ## Install
+
+`butterSkills` is a marketplace with two plugins.
+
+**Core plugin** — butterOPC, butterOPCOffice, butterRecipe, butterRecipeMaker:
 
 ```
 /plugin marketplace add yunfei3014/butterSkills
 /plugin install butterSkills
 ```
 
-This installs **butterOPC**, **butterOPCOffice**, and **butterRecipeMaker**.
+**butterBuild** — the build/QA/ship toolchain — is a large monorepo with its own build system (~50 skills, browser binaries). It ships as a **sibling plugin** in the same marketplace and installs separately:
 
-**butterBuild** is a heavy toolchain (~1 GB — headless-browser binaries, 47 sub-skills) and ships on its own track, not bundled here. Install it separately when you need the build/QA/ship workflow.
+```
+/plugin install butterBuild
+```
+
+> butterBuild's repo lands its compiled artifacts via its own build step — `node_modules` and binaries are never committed; they regenerate on install.
 
 ## /butterSkills
 

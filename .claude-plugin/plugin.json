@@ -1,8 +1,8 @@
 {
   "$schema": "https://anthropic.com/claude-code/plugin.schema.json",
   "name": "butterSkills",
-  "version": "0.1.0",
-  "description": "The butter skill family — the company lifecycle as installable skills: butterOPC (design the company) -> butterOPCOffice (run it) -> butterBuild (build apps) <-> butterRecipeMaker (turn builds into reusable recipes). Bundles butterOPC, butterOPCOffice, and butterRecipeMaker. Run /butterSkills for the live catalog.",
+  "version": "0.2.0",
+  "description": "The butter skill family — the company lifecycle as installable skills: butterOPC (design the company) -> butterOPCOffice (run it) -> butterBuild (build apps) <-> butterRecipe (browse cloneable recipes) / butterRecipeMaker (make new recipes). Bundles butterOPC, butterOPCOffice, butterRecipe, and butterRecipeMaker; butterBuild ships as a sibling plugin. Run /butterSkills for the live catalog.",
   "author": {
     "name": "Yunfei Ma",
     "url": "https://github.com/yunfei3014"
