@@ -31,6 +31,8 @@ When this skill triggers, **do not jump to applying the framework**. The quality
 
 5. **Multi-venture context?** How does this venture sit alongside the others? Is there cross-venture overlap (resources, talent, attention) to surface?
 
+6. **Render target?** Default is a deployed **butterOPCOffice** app on Butterbase — the framework lives as real pages + databases the team can touch, not prose. Only fall back to a markdown venture-page when the user explicitly wants doc-only (quick sketch, throwaway draft, no team to share with). Confirm before defaulting to doc.
+
 Ask these in prose, not all at once — start with the venture and goal, then drill into specifics. Wait for answers before producing framework output. If the user says "just give me the framework already," respect that and proceed — but err on the side of asking when context is thin.
 
 ## Framework structure
@@ -131,7 +133,9 @@ After clarifying questions are answered, work through the user's request using t
 
 5. **Apply the settling test.** If the user describes a process that doesn't end with something landing in a persistent location, the foundation is broken. Name it.
 
-6. **Render the diagram when useful.** When a visual would help — explaining the framework, showing where a piece fits, refreshing someone's mental model — use the SVG template in `references/diagram-template.svg` via the visualizer tool.
+6. **Render the diagram when useful.** When a visual would help — explaining the framework, showing where a piece fits, refreshing someone's mental model — render `references/diagram-template.svg`, an engineering-blueprint schematic (titleblock, Direction one-box, the OKR spine band, the Operating Model cells, the rhythm bar, the settling Foundation). Replace every `[ bracketed ]` placeholder with the venture's real content. **Annotate each block with where it lives** — tag it with the system it actually runs on (the strategy doc, the tracker, the workspace app). A block with no home is a gap worth flagging out loud. Keep empty cells empty — they are the focus signal, not an oversight.
+
+7. **Default the build to Butterbase.** When the user asks to "stand up", "set up", "deploy", "build", or "make this real" for the framework, the default move is to invoke the `butterOPCOffice` skill and ship it as a Butterbase app — not write a markdown doc. The doc path is the fallback (explicitly throwaway / sketch / no team). State the default out loud ("I'll deploy this as a butterOPCOffice on Butterbase unless you'd rather just sketch in markdown") so the user can redirect.
 
 ## Multi-venture pattern
 
@@ -168,7 +172,15 @@ Why it's bad: doesn't map to a specific cell. Is this Create value (Engagement)?
 
 Why: maps clearly to Create value / Engagement (specifically activation). Measurable. Time-bound. Implies specific priorities in the Create value cell.
 
+## Rendering the framework as a live app
+
+**Default: ship it as a butterOPCOffice app on Butterbase.** A deployed team workspace where Direction, OKRs, the Operating Model cells, priorities, and customer data are real pages and databases joined by foreign keys, so the framework points at touchable state instead of prose. Invoke the `butterOPCOffice` skill to stand one up — that is the primary delivery path for this framework.
+
+The markdown venture-page template below is the **fallback** only — use it for a quick throwaway sketch, a solo founder with no team to share with, or when the user explicitly says "doc only". Always state the default out loud before producing prose, so the user can opt into the app instead.
+
+When the framework lives as an app, keep the schematic (`diagram-template.svg`) as a read-only visual that mirrors it: the app is the source of truth, the schematic is the picture.
+
 ## Reference files
 
-- `references/diagram-template.svg` — Canonical SVG for the framework diagram. Use via the visualizer tool.
-- `references/venture-page-template.md` — Notion-ready template for a full venture instance (Direction, Operating Model dashboard, Rhythm pointers, Foundation pointers).
+- `references/diagram-template.svg` — the framework diagram as a self-contained engineering-blueprint schematic (titleblock, Direction one-box, OKR spine band, Operating Model cells, rhythm bar, settling Foundation). Self-styled — renders standalone. Fill the `[ bracketed ]` placeholders for the venture at hand; add a "lives on" tag to each block.
+- `references/venture-page-template.md` — markdown template for a full venture instance (Direction, Operating Model dashboard, Rhythm, Foundation).
